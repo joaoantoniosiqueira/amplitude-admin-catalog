@@ -1,2 +1,5 @@
 rootProject.name = 'amplitude-admin-catalog'
+include 'domain'
+include 'application'
+include 'infrastructure'
 
