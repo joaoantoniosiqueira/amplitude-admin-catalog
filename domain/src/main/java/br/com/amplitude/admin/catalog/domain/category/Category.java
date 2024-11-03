@@ -1,6 +1,7 @@
 package br.com.amplitude.admin.catalog.domain.category;
 
 import br.com.amplitude.admin.catalog.domain.AggregateRoot;
+import br.com.amplitude.admin.catalog.domain.validation.ValidationHandler;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -37,6 +38,11 @@ public class Category extends AggregateRoot<CategoryID> {
         final var now = Instant.now();
 
         return new Category(anId, aName, aDescription, isActive, now, now, null);
+    }
+
+    @Override
+    public void validate(ValidationHandler handler) {
+        new CategoryValidator(this, handler).validate();
     }
 
     public String getName() {
