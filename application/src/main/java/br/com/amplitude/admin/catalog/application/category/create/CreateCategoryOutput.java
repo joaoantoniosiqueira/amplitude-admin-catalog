@@ -1,11 +1,15 @@
 package br.com.amplitude.admin.catalog.application.category.create;
 
-import br.com.amplitude.admin.catalog.domain.category.CategoryID;
+import br.com.amplitude.admin.catalog.domain.category.Category;
 
 public record CreateCategoryOutput(
-        CategoryID id
+        String id
 ) {
-    public static CreateCategoryOutput from(final CategoryID anId) {
+    public static CreateCategoryOutput from(final String anId) {
         return new CreateCategoryOutput(anId);
+    }
+
+    public static CreateCategoryOutput from(final Category aCategory) {
+        return new CreateCategoryOutput(aCategory.getId().getValue());
     }
 }

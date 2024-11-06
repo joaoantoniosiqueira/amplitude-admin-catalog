@@ -3,3 +3,4 @@
 ## Stack
 - JAVA 23
 - Gradle
+- vavr
