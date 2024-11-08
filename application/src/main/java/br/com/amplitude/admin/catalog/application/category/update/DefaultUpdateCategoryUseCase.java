@@ -39,7 +39,7 @@ public class DefaultUpdateCategoryUseCase extends UpdateCategoryUseCase {
         return notification.hasErrors() ? API.Left(notification) : update(aCategory);
     }
 
-    public Either<Notification, UpdateCategoryOutput> update(final Category aCategory) {
+    private Either<Notification, UpdateCategoryOutput> update(final Category aCategory) {
         return API.Try(() -> this.categoryGateway.update(aCategory))
                 .toEither()
                 .bimap(Notification::create, UpdateCategoryOutput::from);
