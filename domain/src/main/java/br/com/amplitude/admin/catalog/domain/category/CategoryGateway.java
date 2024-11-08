@@ -8,7 +8,7 @@ public interface CategoryGateway {
 
     Category create(Category aCategory);
 
-    void deleteBy(CategoryID anId);
+    void deleteById(CategoryID anId);
 
     Optional<Category> findById(CategoryID anId);
 
