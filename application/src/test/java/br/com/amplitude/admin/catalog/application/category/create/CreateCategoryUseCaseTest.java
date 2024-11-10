@@ -63,8 +63,6 @@ public class CreateCategoryUseCaseTest {
 
         final var notification = useCase.execute(aCommand).getLeft();
 
-        //Mockito.lenient().when(categoryGateway.create(Mockito.any())).thenAnswer(AdditionalAnswers.returnsFirstArg());
-
         Assertions.assertEquals(expectedErrorCount, notification.getErrors().size());
         Assertions.assertEquals(expectedErrorMessage, notification.firstError().message());
 
