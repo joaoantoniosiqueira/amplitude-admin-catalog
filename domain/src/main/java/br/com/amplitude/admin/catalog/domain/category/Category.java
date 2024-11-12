@@ -4,6 +4,7 @@ import br.com.amplitude.admin.catalog.domain.AggregateRoot;
 import br.com.amplitude.admin.catalog.domain.validation.ValidationHandler;
 
 import java.time.Instant;
+import java.util.Objects;
 
 public class Category extends AggregateRoot<CategoryID> implements Cloneable {
 
@@ -27,8 +28,8 @@ public class Category extends AggregateRoot<CategoryID> implements Cloneable {
         this.name = aName;
         this.description = aDescription;
         this.active = isActive;
-        this.createdAt = aCreatedAt;
-        this.updatedAt = anUpdatedAt;
+        this.createdAt = Objects.requireNonNull(aCreatedAt, "'createdAt' should not be null");
+        this.updatedAt = Objects.requireNonNull(anUpdatedAt, "'updateAt' should not be null");
         this.deletedAt = aDeletedAt;
     }
 
