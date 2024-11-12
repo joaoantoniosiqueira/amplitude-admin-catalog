@@ -1,6 +1,7 @@
 package br.com.amplitude.admin.catalog.infrastructure.category;
 
 import br.com.amplitude.admin.catalog.domain.category.Category;
+import br.com.amplitude.admin.catalog.domain.category.CategoryID;
 import br.com.amplitude.admin.catalog.infrastructure.MySQLGatewayTest;
 import br.com.amplitude.admin.catalog.infrastructure.category.persistence.CategoryJpaEntity;
 import br.com.amplitude.admin.catalog.infrastructure.category.persistence.CategoryRepository;
@@ -87,5 +88,29 @@ public class CategoryMySQLGatewayTest {
         Assertions.assertEquals(aCategory.getCreatedAt(), actualEntity.getCreatedAt());
         Assertions.assertTrue(aCategory.getUpdatedAt().isBefore(actualCategory.getUpdatedAt()));
         Assertions.assertNull(actualEntity.getDeletedAt());
+    }
+
+    @Test
+    public void givenAPrePersistedCategoryAndValidCategoryId_whenTryToDeleteIt_thenShouldDeleteCategory() {
+        final var aCategory = Category.newCategory("Action", "Dive into a journey full of adrenaline and adventure with our Action Movies category", true);
+
+        Assertions.assertEquals(0, categoryRepository.count());
+
+        final var actualCategory = categoryGateway.create(aCategory);
+
+        Assertions.assertEquals(1, categoryRepository.count());
+
+        categoryGateway.deleteById(aCategory.getId());
+
+        Assertions.assertEquals(0, categoryRepository.count());
+    }
+
+    @Test
+    public void givenInvalidCategoryIdCategoryId_whenTryToDeleteIt_thenShouldDeleteCategory() {
+        Assertions.assertEquals(0, categoryRepository.count());
+
+        categoryGateway.deleteById(CategoryID.from("invalidId"));
+
+        Assertions.assertEquals(0, categoryRepository.count());
     }
 }
